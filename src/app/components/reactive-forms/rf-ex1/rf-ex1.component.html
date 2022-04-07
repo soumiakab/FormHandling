@@ -1,0 +1,9 @@
+<div class="container p-5">
+  <h2>Signup</h2>
+
+<label class="control-label">Email:
+  <input class="form-control" [formControl]="email">
+</label>
+<p>Value: {{ email.value }}</p>
+<button (click)="updateEmail()" class="btn btn-primary">Change Email</button>
+</div>

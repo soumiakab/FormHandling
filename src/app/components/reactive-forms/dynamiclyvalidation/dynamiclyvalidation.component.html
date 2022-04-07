@@ -1,0 +1,87 @@
+<!-- main app container -->
+<div class="card m-3">
+  <h5 class="card-header">Angular 8 Reactive Form Validation</h5>
+  <div class="card-body">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+              <div class="form-group col">
+                  <label>Title</label>
+                  <select formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && getf().title.errors }">
+                      <option value=""></option>
+                      <option value="Mr">Mr</option>
+                      <option value="Mrs">Mrs</option>
+                      <option value="Miss">Miss</option>
+                      <option value="Ms">Ms</option>
+                  </select>
+                  <div *ngIf="submitted && getf().title.errors" class="invalid-feedback">
+                      <div *ngIf="getf().title.errors.required">Title is required</div>
+                  </div>
+              </div>
+              <div class="form-group col-5">
+                  <label>First Name</label>
+                  <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && getf().firstName.errors }" />
+                  <div *ngIf="submitted && getf().firstName.errors" class="invalid-feedback">
+                      <div *ngIf="getf().firstName.errors.required">First Name is required</div>
+                  </div>
+              </div>
+              <div class="form-group col-5">
+                  <label>Last Name</label>
+                  <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && getf().lastName.errors }" />
+                  <div *ngIf="submitted && getf().lastName.errors" class="invalid-feedback">
+                      <div *ngIf="getf().lastName.errors.required">Last Name is required</div>
+                  </div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label>Email</label>
+              <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && getf().email.errors }" />
+              <div *ngIf="submitted && getf().email.errors" class="invalid-feedback">
+                  <div *ngIf="getf().email.errors.required">Email is required</div>
+                  <div *ngIf="getf().email.errors.email">Email must be a valid email address</div>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col">
+                  <label>Password</label>
+                  <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && getf().password.errors }" />
+                  <div *ngIf="submitted && getf().password.errors" class="invalid-feedback">
+                      <div *ngIf="getf().password.errors.required">Password is required</div>
+                      <div *ngIf="getf().password.errors.minlength">Password must be at least 6 characters</div>
+                  </div>
+              </div>
+              <div class="form-group col">
+                  <label>Confirm Password</label>
+                  <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && getf().confirmPassword.errors }" />
+                  <div *ngIf="submitted && getf().confirmPassword.errors" class="invalid-feedback">
+                      <div *ngIf="getf().confirmPassword.errors.required">Confirm Password is required</div>
+                      <div *ngIf="getf().confirmPassword.errors.mustMatch">Passwords must match</div>
+                  </div>
+              </div>
+          </div>
+          <div class="form-group form-check">
+              <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && getf().acceptTerms.errors }" />
+              <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+              <div *ngIf="submitted && getf().acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+          </div>
+
+          <div class="custom-col emp-check">
+            <input class="form-check-input" formControlName="employed" type="checkbox" value="" id="flexCheckDefault" (change)="handleValueChange()">
+            <label class="form-check-label" for="flexCheckDefault">
+              Employed
+            </label>
+          </div>
+
+          <div class="custom-col">
+            <input type="text" formControlName="companyName" class="form-control mb-4"
+            placeholder="Company Name">
+            <span *ngIf="submitted && getf().companyName.hasError('required')">
+                * Company Name is required
+            </span>
+        </div>
+          <div class="text-center">
+              <button class="btn btn-primary mr-1">Register</button>
+              <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+          </div>
+      </form>
+  </div>
+</div>
